@@ -1,3 +1,3 @@
 ```
-cargo shuttle project start --idle-minutes 40
+cargo shuttle project start --idle-minutes 0
 ```
