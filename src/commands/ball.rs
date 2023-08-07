@@ -14,8 +14,6 @@ pub async fn execute(_self: &Bot, ctx: Context, msg: Message) -> CommandResult {
         .header("User-Agent", "Email: bo31102007@gmail.com")
         .send().await.unwrap()
         .text().await.unwrap();
-    if let Err(e) = msg.channel_id.say(&ctx.http, text).await {
-        error!("Error sending message: {:?}", e);
-    }
+    msg.channel_id.say(&ctx.http, text).await?;
     Ok(())
 }

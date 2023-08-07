@@ -2,15 +2,16 @@ mod commands;
 mod events;
 
 use serenity::prelude::*;
-use shuttle_secrets::SecretStore;
 
 pub struct Bot {
-    reqwest_client: reqwest::Client
+    reqwest_client: reqwest::Client,
+    persist: shuttle_persist::PersistInstance
 }
 
 #[shuttle_runtime::main]
 async fn serenity(
-    #[shuttle_secrets::Secrets] secret_store: SecretStore,
+    #[shuttle_secrets::Secrets] secret_store: shuttle_secrets::SecretStore,
+    #[shuttle_persist::Persist] persist: shuttle_persist::PersistInstance
 ) -> shuttle_serenity::ShuttleSerenity {
     // Get the discord token set in `Secrets.toml`
     let token = secret_store.get("DISCORD_TOKEN")
@@ -28,9 +29,7 @@ async fn serenity(
         GatewayIntents::DIRECT_MESSAGES;
 
     let client = Client::builder(&token, intents)
-        .event_handler(Bot {
-            reqwest_client
-        })
+        .event_handler(Bot { reqwest_client, persist })
         .await
         .expect("Err creating client");
     

@@ -42,6 +42,6 @@ impl EventHandler for Bot {
     }
 
     async fn ready(&self, _: Context, ready: Ready) {
-        info!("{} is connected!", ready.user.name);
+        info!("{} reporting, your mom gay.", ready.user.name);
     }
 }
