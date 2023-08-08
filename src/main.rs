@@ -1,6 +1,8 @@
 mod commands;
 mod events;
+mod utils;
 
+use std::env;
 use serenity::prelude::*;
 
 pub struct Bot {
@@ -17,9 +19,13 @@ async fn serenity(
     let token = secret_store.get("DISCORD_TOKEN")
         .expect("'DISCORD_TOKEN' was not found");
 
+    // Get USER_AGENT
+    static APP_USER_AGENT: &str = concat!(
+        env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),
+    );
     // Create a reqwest client for http requests
     let reqwest_client = reqwest::Client::builder()
-        .user_agent("")
+        .user_agent(APP_USER_AGENT)
         .build()
         .expect("Err creating reqwest client");
 
