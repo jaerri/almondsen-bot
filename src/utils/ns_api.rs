@@ -1,9 +1,9 @@
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize)]
 pub struct NationLogin {
     name: String,
-    x_autologin: String
+    secret: String
 }
 
 pub struct NsAPI {

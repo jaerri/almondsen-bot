@@ -29,9 +29,9 @@ impl EventHandler for Bot {
                 }
             }};
         }
-        // Add command module here
+        // Add command name here
         let result: CommandResult = exec!(args[0].as_str(), 
-            [ hello, ball, ping ]
+            [ hello, ball, ping, addlogin ]
         );
 
         /*match &msg.content[1..] {

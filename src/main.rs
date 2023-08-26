@@ -1,5 +1,5 @@
 mod commands;
-mod events;
+mod event_handler;
 mod utils;
 
 use std::env;
@@ -21,7 +21,7 @@ async fn serenity(
 
     // Get USER_AGENT
     static APP_USER_AGENT: &str = concat!(
-        env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),
+        env!("CARGO_PKG_NAME"), "/v", env!("CARGO_PKG_VERSION"), " (", env!("CARGO_PKG_REPOSITORY"), ")"
     );
     // Create a reqwest client for http requests
     let reqwest_client = reqwest::Client::builder()
