@@ -8,8 +8,8 @@ use tracing::error;
 pub const NAME: &str = "ball";
 pub const DESCRIPTION: &str = "Send Ballinngs";
 
-pub async fn execute(_self: &Bot, ctx: Context, msg: Message, args: Vec<String>) -> CommandResult {
-    let reqwest_client = &_self.reqwest_client;
+pub async fn execute(bot: &Bot, ctx: Context, msg: Message, args: Vec<String>) -> CommandResult {
+    let reqwest_client = &bot.reqwest_client;
     let text = reqwest_client.get("https://www.nationstates.net/cgi-bin/api.cgi?nation=Ballinngs")
         .send().await?
         .text().await?;
